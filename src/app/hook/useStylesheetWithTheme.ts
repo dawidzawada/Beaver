@@ -9,7 +9,8 @@ export const useStylesheetWithTheme = <T extends StyleSheetData>(styleSheetFunct
   const theme = useTheme();
 
   return useMemo(() => {
-    const data = styleSheetFunction(theme);
-    return StyleSheet.create<T>(data);
-  }, [styleSheetFunction, theme]);
+    return StyleSheet.create<T>(styleSheetFunction(theme));
+    // Style should be recalculated only when theme changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [theme.dark]);
 };

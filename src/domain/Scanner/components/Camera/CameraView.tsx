@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {useCameraDevice, Camera} from 'react-native-vision-camera';
 import {Text, View} from 'react-native';
 import {styles} from './CameraView.styles.ts';
@@ -10,20 +10,13 @@ type Props = {
 };
 
 export const CameraView = ({onCloseButtonPress}: Props) => {
-  const [isCameraActive, setIsCameraActive] = useState(false);
   const device = useCameraDevice('back');
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsCameraActive(true);
-    }, 100);
-  }, []);
 
   return (
     <View style={styles.CameraViewWrapper}>
       {device ? (
         <>
-          <Camera style={styles.VisionCamera} device={device} isActive={isCameraActive} />
+          <Camera style={styles.VisionCamera} device={device} isActive />
           <IconButton
             style={styles.CloseButton}
             icon='close'
