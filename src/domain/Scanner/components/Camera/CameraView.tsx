@@ -4,6 +4,7 @@ import {Text, View} from 'react-native';
 import {styles} from './CameraView.styles.ts';
 import {IconButton} from 'react-native-paper';
 import {ColorEnum} from '@app/enums/Color.enum.ts';
+import {useTranslation} from 'react-i18next';
 
 type Props = {
   onCloseButtonPress: () => void;
@@ -11,6 +12,7 @@ type Props = {
 
 export const CameraView = ({onCloseButtonPress}: Props) => {
   const device = useCameraDevice('back');
+  const {t} = useTranslation();
 
   return (
     <View style={styles.CameraViewWrapper}>
@@ -26,7 +28,7 @@ export const CameraView = ({onCloseButtonPress}: Props) => {
           />
         </>
       ) : (
-        <Text>Err</Text>
+        <Text>{t('general.error')}</Text>
       )}
     </View>
   );
