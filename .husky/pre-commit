@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+npx lint-staged
+echo "🚀🚀 npm audit in progress..."
+npm audit --audit-level=high || echo "🚨🚨 npm audit error, please check and fix it ASAP❗❗"
