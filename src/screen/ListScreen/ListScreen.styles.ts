@@ -23,6 +23,7 @@ export const useListScreenStyles = () => {
       justifyContent: 'flex-start',
       alignItems: 'flex-start',
       paddingBottom: 100,
+      paddingHorizontal: 16,
     },
     Backdrop: {
       position: 'absolute',

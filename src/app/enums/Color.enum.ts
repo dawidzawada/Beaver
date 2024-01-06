@@ -6,7 +6,7 @@ export const ColorEnum = {
   Red: '#D13247',
   Vine: '#481017',
   Grey: '#b9b9b9',
-  White: '#efefef',
+  White: '#f6f6f6',
   Graphite: '#1a1c1f',
   Tint: '#0000000C',
 };
