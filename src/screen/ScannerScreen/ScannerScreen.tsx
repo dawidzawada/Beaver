@@ -7,11 +7,27 @@ import {Text} from 'react-native-paper';
 import {CameraView} from '@domain/Scanner/components/Camera/CameraView.tsx';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {StackParamList} from '@app/navigation/StackParamList.type.ts';
+import {transformTypeCameraToBwip} from '@domain/Code/utils/transformTypeCameraToBwip.ts';
+import {CameraCode} from 'react-native-vision-camera';
+import {useTranslation} from 'react-i18next';
 
 type Props = NativeStackScreenProps<StackParamList, 'Scanner'>;
 
 export const ScannerScreen = ({navigation}: Props) => {
+  const {t} = useTranslation();
   const {hasPermission, requestPermission} = useCameraPermission();
+
+  const onClose = () => {
+    navigation.navigate('List');
+  };
+
+  const onCodeScanned = (cameraCodes: CameraCode[]) => {
+    const firstCode = cameraCodes[0];
+    if (firstCode !== 'unknown') {
+      const codeType = transformTypeCameraToBwip(firstCode.type);
+      codeType && navigation.navigate('AddEditCode', {type: codeType, value: firstCode.value});
+    }
+  };
 
   useEffect(() => {
     if (!hasPermission) {
@@ -19,18 +35,14 @@ export const ScannerScreen = ({navigation}: Props) => {
     }
   }, [hasPermission, requestPermission]);
 
-  const onClose = () => {
-    navigation.navigate('List');
-  };
-
   return (
     <SafeAreaView style={styles.ScannerScreenWrapper}>
       {hasPermission ? (
-        <CameraView onCloseButtonPress={onClose} />
+        <CameraView onCloseButtonPress={onClose} onCodeScanned={onCodeScanned} />
       ) : (
         <View style={styles.NoPermissionsWrapper}>
           <Text variant='titleMedium' style={styles.NoPermissionsText}>
-            No Camera permissions
+            {t('camera.no-permissions')}
           </Text>
         </View>
       )}

@@ -32,7 +32,7 @@ export const ListScreen = ({navigation}: Props) => {
   };
 
   const onNewCodePress = () => {
-    navigation.navigate('AddEditCode');
+    navigation.navigate('ChooseType');
     setMenuOpened(false);
   };
 

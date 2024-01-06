@@ -15,7 +15,7 @@ export const CodeListItem = ({type, name, onPress}: Props) => {
   return (
     <TouchableOpacity style={Wrapper} onPress={onPress}>
       <View style={Box}>
-        <Icon size={80} source={type === 'qr' ? 'qrcode' : 'barcode'} />
+        <Icon size={60} source={type === 'qr' ? 'qrcode' : 'barcode'} />
       </View>
       <Text style={Title}>{name}</Text>
     </TouchableOpacity>

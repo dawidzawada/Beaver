@@ -14,7 +14,7 @@ export const useCodeListItemStyles = () => {
       width: '50%',
       alignItems: 'center',
       justifyContent: 'center',
-      padding: 10,
+      padding: 8,
       gap: 8,
     },
     Box: {
