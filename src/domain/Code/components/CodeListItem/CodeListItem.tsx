@@ -7,13 +7,14 @@ type Props = {
   type: 'qr' | 'barcode';
   name: string;
   onPress: () => void;
+  onLongPress: () => void;
 };
 
-export const CodeListItem = ({type, name, onPress}: Props) => {
+export const CodeListItem = ({type, name, onPress, onLongPress}: Props) => {
   const {Wrapper, Box, Title} = useCodeListItemStyles();
 
   return (
-    <TouchableOpacity style={Wrapper} onPress={onPress}>
+    <TouchableOpacity style={Wrapper} onPress={onPress} onLongPress={onLongPress}>
       <View style={Box}>
         <Icon size={60} source={type === 'qr' ? 'qrcode' : 'barcode'} />
       </View>

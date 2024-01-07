@@ -11,6 +11,7 @@ module.exports = {
           '@app': './src/app',
           '@domain': './src/domain',
           '@screen': './src/screen',
+          '@store': './src/store',
         },
       },
     ],

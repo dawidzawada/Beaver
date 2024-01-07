@@ -15,6 +15,9 @@
       ],
       "@screen/*": [
         "src/screen/*"
+      ],
+      "@store/*": [
+        "src/store/*"
       ]
     }
   },
