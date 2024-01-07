@@ -1,4 +1,4 @@
-import {ViewStyle} from 'react-native';
+import {TextStyle, ViewStyle} from 'react-native';
 import {useStylesheetWithTheme} from '@app/hook/useStylesheetWithTheme.ts';
 
 type ListScreenStyles = {
@@ -7,6 +7,7 @@ type ListScreenStyles = {
   Backdrop: ViewStyle;
   ButtonsBox: ViewStyle;
   SubButtonsBox: ViewStyle;
+  NoCodes: TextStyle;
 };
 
 export const useListScreenStyles = () => {
@@ -45,6 +46,11 @@ export const useListScreenStyles = () => {
     SubButtonsBox: {
       justifyContent: 'center',
       alignItems: 'center',
+    },
+    NoCodes: {
+      marginVertical: 50,
+      width: '100%',
+      textAlign: 'center',
     },
   }));
 };

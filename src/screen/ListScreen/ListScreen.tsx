@@ -7,14 +7,19 @@ import {ScrollView, TouchableOpacity, View, ViewStyle} from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {StackParamList} from '@app/navigation/StackParamList.type.ts';
 import {useGrowAnimation} from '@app/hook/useGrowAnimation.ts';
+import {useCodesStore} from '@store/codes.store.ts';
+import {useTranslation} from 'react-i18next';
 
 type Props = NativeStackScreenProps<StackParamList, 'List'>;
 
 export const ListScreen = ({navigation}: Props) => {
-  const {ListScreenWrapper, List, ButtonsBox, SubButtonsBox, Backdrop} = useListScreenStyles();
+  const {t} = useTranslation();
+  const {ListScreenWrapper, List, ButtonsBox, SubButtonsBox, Backdrop, NoCodes} = useListScreenStyles();
   const {colors} = useTheme();
   const [menuOpened, setMenuOpened] = useState(false);
   const growAnimation = useGrowAnimation({opened: menuOpened});
+
+  const [codes, removeCode] = useCodesStore(state => [state.codes, state.removeCode]);
 
   const iconButtonsStyle = useMemo<ViewStyle>(
     () => ({
@@ -31,6 +36,10 @@ export const ListScreen = ({navigation}: Props) => {
     setMenuOpened(false);
   };
 
+  const onLongCodePress = (id: string) => {
+    removeCode(id);
+  };
+
   const onNewCodePress = () => {
     navigation.navigate('ChooseType');
     setMenuOpened(false);
@@ -45,11 +54,20 @@ export const ListScreen = ({navigation}: Props) => {
     <SafeAreaView style={ListScreenWrapper}>
       <Text variant='headlineLarge'>Beaver</Text>
       <ScrollView contentContainerStyle={List}>
-        <CodeListItem type='qr' name='Code #1' onPress={onCodePress} />
-        <CodeListItem type='qr' name='Code #2' onPress={onCodePress} />
-        <CodeListItem type='barcode' name='Code #3' onPress={onCodePress} />
-        <CodeListItem type='qr' name='Code #4' onPress={onCodePress} />
-        <CodeListItem type='qr' name='Code #5' onPress={onCodePress} />
+        {codes.map(code => (
+          <CodeListItem
+            key={code.id}
+            type='qr'
+            name={code.title}
+            onPress={onCodePress}
+            onLongPress={() => onLongCodePress(code.id)}
+          />
+        ))}
+        {codes.length === 0 && (
+          <Text variant='titleLarge' style={NoCodes}>
+            {t('list.no-codes')}
+          </Text>
+        )}
       </ScrollView>
       {menuOpened && <TouchableOpacity style={Backdrop} onPress={() => setMenuOpened(false)} />}
       <View style={ButtonsBox}>

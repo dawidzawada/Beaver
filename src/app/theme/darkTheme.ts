@@ -12,5 +12,6 @@ export const darkTheme: MD3Theme = {
     error: ColorEnum.Red,
     onError: ColorEnum.Vine,
     outline: ColorEnum.Grey,
+    background: ColorEnum.Graphite,
   },
 };
