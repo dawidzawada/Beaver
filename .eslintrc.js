@@ -1,7 +1,7 @@
 module.exports = {
   root: true,
   extends: ['@react-native-community', 'eslint:recommended', 'plugin:@typescript-eslint/recommended'],
-  plugins: ['react-native', 'unused-imports'],
+  plugins: ['react-native', 'unused-imports', 'detox'],
   rules: {
     'no-unused-vars': 'off',
     '@typescript-eslint/no-var-requires': 'off',

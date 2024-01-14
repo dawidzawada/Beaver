@@ -51,7 +51,7 @@ export const ListScreen = ({navigation}: Props) => {
   };
 
   return (
-    <SafeAreaView style={ListScreenWrapper}>
+    <SafeAreaView style={ListScreenWrapper} testID='list-screen'>
       <Text variant='headlineLarge'>Beaver</Text>
       <ScrollView contentContainerStyle={List}>
         {codes.map(code => (
@@ -64,7 +64,7 @@ export const ListScreen = ({navigation}: Props) => {
           />
         ))}
         {codes.length === 0 && (
-          <Text variant='titleLarge' style={NoCodes}>
+          <Text testID='no-codes' variant='titleLarge' style={NoCodes}>
             {t('list.no-codes')}
           </Text>
         )}
@@ -73,6 +73,7 @@ export const ListScreen = ({navigation}: Props) => {
       <View style={ButtonsBox}>
         <View style={SubButtonsBox}>
           <IconButton
+            testID='scan-btn'
             icon='camera'
             size={30}
             mode='contained'
@@ -82,6 +83,7 @@ export const ListScreen = ({navigation}: Props) => {
             style={iconButtonsStyle}
           />
           <IconButton
+            testID='add-new-btn'
             icon='text'
             size={30}
             mode='contained'
@@ -92,6 +94,7 @@ export const ListScreen = ({navigation}: Props) => {
           />
         </View>
         <IconButton
+          testID='add-menu-btn'
           icon={menuOpened ? 'minus' : 'plus'}
           onPress={toggleMenu}
           size={50}

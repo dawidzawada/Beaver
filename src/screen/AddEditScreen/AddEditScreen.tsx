@@ -46,13 +46,14 @@ export const AddEditScreen = ({route, navigation}: Props) => {
   }, [editMode, navigation, t]);
 
   return (
-    <SafeAreaView style={AddEditScreenWrapper}>
+    <SafeAreaView style={AddEditScreenWrapper} testID='add-edit'>
       <View style={Box}>
         <View style={CodeView} onLayout={e => setCodeViewWidth(e.nativeEvent.layout.width)}>
           <CodeDrawer type={type} value={codeValue} codeContainerWidth={codeViewWidth} />
         </View>
         <TextInput mode='outlined' label={t('add-edit.code-type')} value={`(${type}) ${t(`code.${type}`)}`} disabled />
         <TextInput
+          testID='code-value'
           mode='outlined'
           label={t('add-edit.code-value')}
           placeholder={t('add-edit.code-value.placeholder')}
@@ -60,6 +61,7 @@ export const AddEditScreen = ({route, navigation}: Props) => {
           onChangeText={valueText => setCodeValue(valueText)}
         />
         <TextInput
+          testID='code-title'
           mode='outlined'
           label={t('add-edit.code-title')}
           placeholder={t('add-edit.code-title.placeholder')}
@@ -70,7 +72,7 @@ export const AddEditScreen = ({route, navigation}: Props) => {
       </View>
       <View style={Spacer} />
       <View style={Box}>
-        <Button mode='contained' disabled={!isDataProvided} onPress={onAddPress}>
+        <Button testID='add-edit-btn' mode='contained' disabled={!isDataProvided} onPress={onAddPress}>
           {editMode ? t('general.edit') : t('general.add')}
         </Button>
         <Button mode='text' onPress={onCancelPress}>
