@@ -14,7 +14,7 @@ export const CodeListItem = ({type, name, onPress, onLongPress}: Props) => {
   const {Wrapper, Box, Title} = useCodeListItemStyles();
 
   return (
-    <TouchableOpacity style={Wrapper} onPress={onPress} onLongPress={onLongPress}>
+    <TouchableOpacity testID='code-list-item' style={Wrapper} onPress={onPress} onLongPress={onLongPress}>
       <View style={Box}>
         <Icon size={60} source={type === 'qr' ? 'qrcode' : 'barcode'} />
       </View>
