@@ -32,7 +32,7 @@ export const ChooseTypeScreen = ({navigation}: Props) => {
   };
 
   return (
-    <SafeAreaView style={ChooseTypeScreenWrapper}>
+    <SafeAreaView testID='choose-type' style={ChooseTypeScreenWrapper}>
       <SectionList
         sections={codes}
         renderSectionHeader={({section: {title}}) => (
@@ -41,7 +41,7 @@ export const ChooseTypeScreen = ({navigation}: Props) => {
           </View>
         )}
         renderItem={({item}) => (
-          <TouchableOpacity style={CodeItem} onPress={() => onTypePress(item)}>
+          <TouchableOpacity testID={`type-${item}`} style={CodeItem} onPress={() => onTypePress(item)}>
             <Text variant='titleSmall'>{`${t(`code.${item}`)} (${item})`}</Text>
           </TouchableOpacity>
         )}
