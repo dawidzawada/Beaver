@@ -1,24 +1,25 @@
 import React from 'react';
-import {Icon, Text} from 'react-native-paper';
-import {useCodeListItemStyles} from './CodeListItem.styles.ts';
-import {TouchableOpacity, View} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {codeListItemStylesheet} from './CodeListItem.styles.ts';
+import {TouchableOpacity, View, Text} from 'react-native';
+import {useStyles} from 'react-native-unistyles';
 
 type Props = {
-  type: 'qr' | 'barcode';
+  type: 'qrcode' | 'barcode';
   name: string;
   onPress: () => void;
   onLongPress: () => void;
 };
 
 export const CodeListItem = ({type, name, onPress, onLongPress}: Props) => {
-  const {Wrapper, Box, Title} = useCodeListItemStyles();
+  const {styles, theme} = useStyles(codeListItemStylesheet);
 
   return (
-    <TouchableOpacity testID='code-list-item' style={Wrapper} onPress={onPress} onLongPress={onLongPress}>
-      <View style={Box}>
-        <Icon size={60} source={type === 'qr' ? 'qrcode' : 'barcode'} />
+    <TouchableOpacity testID='code-list-item' style={styles.wrapper} onPress={onPress} onLongPress={onLongPress}>
+      <View style={styles.box}>
+        <Icon size={60} name={type} color={theme.colors.neutralContrast} />
       </View>
-      <Text style={Title}>{name}</Text>
+      <Text style={styles.title}>{name}</Text>
     </TouchableOpacity>
   );
 };

@@ -1,27 +1,26 @@
-import {ViewStyle} from 'react-native';
-import {useStylesheetWithTheme} from '@app/hook/useStylesheetWithTheme.ts';
+import {createStyleSheet} from 'react-native-unistyles';
+import {FontSize} from '@app/enums/FontSize.enum.ts';
 
-type ListScreenStyles = {
-  ChooseTypeScreenWrapper: ViewStyle;
-  SectionTitle: ViewStyle;
-  CodeItem: ViewStyle;
-};
-
-export const useChooseTypeScreenStyles = () => {
-  return useStylesheetWithTheme<ListScreenStyles>(({colors}) => ({
-    ChooseTypeScreenWrapper: {
-      minHeight: '100%',
-      backgroundColor: colors.surface,
-      position: 'relative',
-      flex: 1,
-      paddingBottom: 20,
-    },
-    SectionTitle: {
-      paddingVertical: 20,
-      paddingHorizontal: 10,
-    },
-    CodeItem: {
-      padding: 20,
-    },
-  }));
-};
+export const chooseTypeStyleSheet = createStyleSheet(theme => ({
+  screenWrapper: {
+    minHeight: '100%',
+    backgroundColor: theme.colors.background,
+    position: 'relative',
+    flex: 1,
+    paddingBottom: 20,
+  },
+  sectionTitle: {
+    paddingVertical: 20,
+    paddingHorizontal: 10,
+    color: theme.colors.neutralContrast,
+    backgroundColor: theme.colors.background,
+    fontSize: FontSize.M,
+  },
+  codeItem: {
+    padding: 20,
+  },
+  codeItemText: {
+    fontSize: FontSize.S,
+    color: theme.colors.neutralContrast,
+  },
+}));
