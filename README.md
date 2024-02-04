@@ -9,9 +9,15 @@ just like a Beaver! 🦫
 
 ### Install & Run 🛠️
 
-It's a React Native app, you are going to need either iOS or Android Simulator or a real device connected.
+#### Currently app is developed mainly for Android.
 
+Install dependencies and run Metro:
 ```
 npm install
 npm start
+```
+
+Run Android by pressing "**a**: or:
+```
+npm run android
 ```
