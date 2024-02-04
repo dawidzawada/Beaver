@@ -17,7 +17,7 @@ npm install
 npm start
 ```
 
-Run Android by pressing "**a**: or:
+Run Android by pressing "**a**": or:
 ```
 npm run android
 ```
