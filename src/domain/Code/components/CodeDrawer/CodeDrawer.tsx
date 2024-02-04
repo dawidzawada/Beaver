@@ -1,20 +1,26 @@
 import {toDataURL, CodeRenderOptions, BwipCodeTypes, DataURL} from 'bwip-js';
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Image} from 'react-native';
+import {useStyles} from 'react-native-unistyles';
 
 type Props = {
   type: BwipCodeTypes;
-  value: string | undefined;
-  codeContainerWidth: number | undefined;
+  value: string;
+  codeContainerWidth: number;
 };
 
 export const CodeDrawer = ({type, value, codeContainerWidth}: Props) => {
   const [codeImg, setCodeImg] = useState<DataURL>();
+  const {theme} = useStyles();
 
   useEffect(() => {
     const asyncEffect = async () => {
       if (value && value.length > 0) {
-        const options: CodeRenderOptions = {bcid: type, text: value};
+        const options: CodeRenderOptions = {
+          bcid: type,
+          text: value,
+          barcolor: theme.colors.neutralContrast,
+        };
         try {
           const data = await toDataURL(options);
           setCodeImg(data);
@@ -24,32 +30,17 @@ export const CodeDrawer = ({type, value, codeContainerWidth}: Props) => {
       }
     };
 
-    // Generating code preview should be debounced
-    const timerId = setTimeout(() => {
-      void asyncEffect();
-    }, 300);
+    void asyncEffect();
+  }, [theme.colors.neutralContrast, type, value]);
 
-    // Cleanup for debounce timer
-    return () => clearTimeout(timerId);
-  }, [type, value]);
+  if (codeImg) {
+    const targetHeight = 140;
+    const maxFittedCodeWidth = codeContainerWidth - 20;
 
-  const codeSize = useMemo<{height: number; width: number}>(() => {
-    if (codeImg && codeContainerWidth) {
-      const targetHeight = 140;
-      const maxFittedCodeWidth = codeContainerWidth - 20;
+    const aspectRatio = codeImg.width / codeImg.height;
+    const targetWidth = Math.min(maxFittedCodeWidth, targetHeight * aspectRatio);
+    return <Image style={{height: targetHeight, width: targetWidth}} source={{uri: codeImg.uri}} />;
+  }
 
-      const aspectRatio = codeImg.width / codeImg.height;
-      const targetWidth = Math.min(maxFittedCodeWidth, targetHeight * aspectRatio);
-      return {width: targetWidth, height: targetHeight};
-    }
-
-    return {
-      width: 0,
-      height: 0,
-    };
-  }, [codeImg, codeContainerWidth]);
-
-  return codeImg ? (
-    <Image style={{height: codeSize.height, width: codeSize.width}} source={{uri: codeImg.uri}} />
-  ) : null;
+  return null;
 };

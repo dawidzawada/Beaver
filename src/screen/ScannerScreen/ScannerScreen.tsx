@@ -1,9 +1,8 @@
 import React, {useEffect} from 'react';
-import {View} from 'react-native';
+import {View, Text} from 'react-native';
 import {useCameraPermission} from 'react-native-vision-camera';
 import {styles} from './ScannerScreen.styles.ts';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {Text} from 'react-native-paper';
 import {CameraView} from '@domain/Scanner/components/Camera/CameraView.tsx';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {StackParamList} from '@app/navigation/StackParamList.type.ts';
@@ -41,9 +40,7 @@ export const ScannerScreen = ({navigation}: Props) => {
         <CameraView onCloseButtonPress={onClose} onCodeScanned={onCodeScanned} />
       ) : (
         <View style={styles.NoPermissionsWrapper}>
-          <Text variant='titleMedium' style={styles.NoPermissionsText}>
-            {t('camera.no-permissions')}
-          </Text>
+          <Text style={styles.NoPermissionsText}>{t('camera.no-permissions')}</Text>
         </View>
       )}
     </SafeAreaView>

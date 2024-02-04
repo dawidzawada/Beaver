@@ -2,10 +2,9 @@ import React from 'react';
 import {useCameraDevice, Camera, useCodeScanner} from 'react-native-vision-camera';
 import {Text, View} from 'react-native';
 import {styles} from './CameraView.styles.ts';
-import {IconButton} from 'react-native-paper';
-import {ColorEnum} from '@app/enums/Color.enum.ts';
 import {useTranslation} from 'react-i18next';
 import {Code, CodeScannerFrame} from 'react-native-vision-camera/src/CodeScanner.ts';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 type Props = {
   onCloseButtonPress: () => void;
@@ -38,13 +37,7 @@ export const CameraView = ({onCloseButtonPress, onCodeScanned}: Props) => {
       {device ? (
         <>
           <Camera style={styles.VisionCamera} device={device} isActive codeScanner={codeScanner} />
-          <IconButton
-            style={styles.CloseButton}
-            icon='close'
-            size={40}
-            iconColor={ColorEnum.White}
-            onPress={onCloseButtonPress}
-          />
+          <Icon size={40} name='close' style={styles.CloseButton} onPress={onCloseButtonPress} />
         </>
       ) : (
         <Text>{t('general.error')}</Text>

@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator, NativeStackNavigationOptions} from '@react-navigation/native-stack';
 import {ListScreen} from '@screen/ListScreen/ListScreen.tsx';
@@ -8,25 +8,21 @@ import {AddEditScreen} from '@screen/AddEditScreen/AddEditScreen.tsx';
 import {BeaverScreen} from '@screen/BeaverScreen/BeaverScreen.tsx';
 import {StackParamList} from '@app/navigation/StackParamList.type.ts';
 import {ChooseTypeScreen} from '@screen/ChooseTypeScreen/ChooseTypeScreen.tsx';
-import {useTheme} from 'react-native-paper';
 import {useTranslation} from 'react-i18next';
+import {useStyles} from 'react-native-unistyles';
 
 const Stack = createNativeStackNavigator<StackParamList>();
 
 export const Navigation = () => {
   const {t} = useTranslation();
-  const {colors, dark} = useTheme();
+  const {theme} = useStyles();
 
-  const screenOptions = useMemo<NativeStackNavigationOptions>(
-    () => ({
-      headerStyle: {
-        backgroundColor: colors.surface,
-      },
-      headerTintColor: colors.onSurface,
-    }),
-    //eslint-disable-next-line react-hooks/exhaustive-deps
-    [dark],
-  );
+  const screenOptions: NativeStackNavigationOptions = {
+    headerStyle: {
+      backgroundColor: theme.colors.background,
+    },
+    headerTintColor: theme.colors.neutralContrast,
+  };
 
   return (
     <NavigationContainer>

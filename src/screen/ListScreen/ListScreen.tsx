@@ -1,33 +1,25 @@
-import React, {useMemo, useState} from 'react';
-import {IconButton, Text, useTheme} from 'react-native-paper';
-import {useListScreenStyles} from '@screen/ListScreen/ListScreen.styles.ts';
+import React, {useState} from 'react';
+import {listScreenStyleSheet} from '@screen/ListScreen/ListScreen.styles.ts';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {CodeListItem} from '@domain/Code/components/CodeListItem/CodeListItem.tsx';
-import {ScrollView, TouchableOpacity, View, ViewStyle} from 'react-native';
+import {Text, FlatList} from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {StackParamList} from '@app/navigation/StackParamList.type.ts';
-import {useGrowAnimation} from '@app/hook/useGrowAnimation.ts';
 import {useCodesStore} from '@store/codes.store.ts';
 import {useTranslation} from 'react-i18next';
+import {useStyles} from 'react-native-unistyles';
+import {FloatingMenu} from '@app/components/FloatingMenu/FloatingMenu.tsx';
+import {Logo} from '@app/components/Logo/Logo.tsx';
+import {Backdrop} from '@app/components/Backdrop/Backdrop.tsx';
 
 type Props = NativeStackScreenProps<StackParamList, 'List'>;
 
 export const ListScreen = ({navigation}: Props) => {
+  const {styles} = useStyles(listScreenStyleSheet);
   const {t} = useTranslation();
-  const {ListScreenWrapper, List, ButtonsBox, SubButtonsBox, Backdrop, NoCodes} = useListScreenStyles();
-  const {colors} = useTheme();
   const [menuOpened, setMenuOpened] = useState(false);
-  const growAnimation = useGrowAnimation({opened: menuOpened});
 
   const [codes, removeCode] = useCodesStore(state => [state.codes, state.removeCode]);
-
-  const iconButtonsStyle = useMemo<ViewStyle>(
-    () => ({
-      display: menuOpened ? 'flex' : 'none',
-      transform: [{scale: growAnimation}],
-    }),
-    [growAnimation, menuOpened],
-  );
 
   const toggleMenu = () => setMenuOpened(open => !open);
 
@@ -51,59 +43,35 @@ export const ListScreen = ({navigation}: Props) => {
   };
 
   return (
-    <SafeAreaView style={ListScreenWrapper} testID='list-screen'>
-      <Text variant='headlineLarge'>Beaver</Text>
-      <ScrollView contentContainerStyle={List}>
-        {codes.map(code => (
+    <SafeAreaView style={styles.container} testID='list-screen'>
+      <Logo />
+      {codes.length === 0 && (
+        <Text testID='no-codes' style={styles.noCodes}>
+          {t('list.no-codes')}
+        </Text>
+      )}
+
+      <FlatList
+        data={codes}
+        numColumns={2}
+        contentContainerStyle={styles.list}
+        renderItem={({item}) => (
           <CodeListItem
-            key={code.id}
-            type='qr'
-            name={code.title}
+            key={item.id}
+            type='qrcode'
+            name={item.title}
             onPress={onCodePress}
-            onLongPress={() => onLongCodePress(code.id)}
+            onLongPress={() => onLongCodePress(item.id)}
           />
-        ))}
-        {codes.length === 0 && (
-          <Text testID='no-codes' variant='titleLarge' style={NoCodes}>
-            {t('list.no-codes')}
-          </Text>
         )}
-      </ScrollView>
-      {menuOpened && <TouchableOpacity style={Backdrop} onPress={() => setMenuOpened(false)} />}
-      <View style={ButtonsBox}>
-        <View style={SubButtonsBox}>
-          <IconButton
-            testID='scan-btn'
-            icon='camera'
-            size={30}
-            mode='contained'
-            containerColor={colors.primary}
-            iconColor={colors.onPrimary}
-            onPress={onScanCodePress}
-            style={iconButtonsStyle}
-          />
-          <IconButton
-            testID='add-new-btn'
-            icon='text'
-            size={30}
-            mode='contained'
-            containerColor={colors.primary}
-            iconColor={colors.onPrimary}
-            onPress={onNewCodePress}
-            style={iconButtonsStyle}
-          />
-        </View>
-        <IconButton
-          testID='add-menu-btn'
-          icon={menuOpened ? 'minus' : 'plus'}
-          onPress={toggleMenu}
-          size={50}
-          mode='contained'
-          containerColor={colors.primary}
-          iconColor={colors.onPrimary}
-          animated
-        />
-      </View>
+      />
+      {menuOpened && <Backdrop onPress={() => setMenuOpened(false)} />}
+      <FloatingMenu
+        opened={menuOpened}
+        onScanCodePress={onScanCodePress}
+        onNewCodePress={onNewCodePress}
+        onToggleMenu={toggleMenu}
+      />
     </SafeAreaView>
   );
 };
