@@ -8,7 +8,7 @@ export const backdropStyles = createStyleSheet(theme => ({
     width: '100%',
     height: '100%',
     backgroundColor: theme.colors.backdrop,
-    zIndex: 1,
+    zIndex: -1,
   },
   pressableBackdrop: {
     width: '100%',

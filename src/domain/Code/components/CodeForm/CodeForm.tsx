@@ -1,6 +1,6 @@
 import {View} from 'react-native';
 import {Button} from '@app/components/Button/Button.tsx';
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Input} from '@app/components/Input/Input.tsx';
 import {useStyles} from 'react-native-unistyles';
 import {codeFormStylesheet} from '@domain/Code/components/CodeForm/CodeForm.styles.ts';
@@ -27,8 +27,6 @@ export const CodeForm = ({type, value, onAdd, onCancel, editMode}: Props) => {
   const [title, setTitle] = useState<string>('');
   const debouncedUpdateValue = useDebounce((val: string | undefined) => setDebouncedValue(val), 500);
 
-  const codeViewWidth = useRef<number>();
-
   const onAddPress = () => {
     codeValue && onAdd(codeValue, title);
   };
@@ -44,10 +42,8 @@ export const CodeForm = ({type, value, onAdd, onCancel, editMode}: Props) => {
   return (
     <>
       <View style={styles.box}>
-        <View style={styles.codeView} onLayout={e => (codeViewWidth.current = e.nativeEvent.layout.width)}>
-          {debouncedValue && (
-            <MemoizedCodeDrawer type={type} value={debouncedValue} codeContainerWidth={codeViewWidth.current ?? 0} />
-          )}
+        <View style={styles.codeView}>
+          {debouncedValue && <MemoizedCodeDrawer type={type} value={debouncedValue} />}
         </View>
         <Input label={t('add-edit.code-type')} value={`(${type}) ${t(`code.${type}`)}`} disabled />
         <Input
