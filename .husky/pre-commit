@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+bun run lint:fix
+echo "🚀🚀 npm audit in progress..."
+bun audit --audit-level=high || echo "🚨🚨 npm audit error, please check and fix it ASAP❗❗"
+
