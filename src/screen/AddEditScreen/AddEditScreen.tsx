@@ -1,41 +1,41 @@
-import React, {useEffect} from 'react';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {StackParamList} from '@app/navigation/StackParamList.type.ts';
-import {useTranslation} from 'react-i18next';
-import {addEditScreenStylesheet} from './AddEditScreen.styles.ts';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {useStyles} from 'react-native-unistyles';
-import {useCodesStore} from '@store/codes.store.ts';
-import {CodeForm} from '@domain/Code/components/CodeForm/CodeForm.tsx';
+import { CodeForm } from "@domain/Code/components/CodeForm/CodeForm";
+import { routerPush, useTypedParams } from "@shared/navigation/typedRouting";
+import { useCodesStore } from "@store/codes.store";
+import { useNavigation } from "expo-router";
+import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useStyles } from "react-native-unistyles";
 
-type Props = NativeStackScreenProps<StackParamList, 'AddEditCode'>;
+import { addEditScreenStylesheet } from "./AddEditScreen.styles";
 
-export const AddEditScreen = ({route, navigation}: Props) => {
-  const {t} = useTranslation();
-  const {styles} = useStyles(addEditScreenStylesheet);
-  const {type, value, editMode} = route.params;
+export const AddEditScreen = () => {
+  const { t } = useTranslation();
+  const navigation = useNavigation();
+  const { styles } = useStyles(addEditScreenStylesheet);
+  const { type, value, editMode } = useTypedParams("/add-edit");
 
   const addCode = useCodesStore(state => state.addCode);
 
   const onCancel = () => {
-    navigation.navigate('List');
+    routerPush("/list");
   };
 
   const onAdd = (codeValue: string, title: string) => {
-    addCode({type, value: codeValue, title});
-    navigation.navigate('List');
+    addCode({ type, value: codeValue, title });
+    routerPush("/list");
   };
 
   useEffect(() => {
     if (editMode) {
-      navigation.setOptions({headerTitle: t('navigation.edit-code')});
+      navigation.setOptions({ headerShown: t("navigation.edit-code") });
     } else {
-      navigation.setOptions({headerTitle: t('navigation.add-code')});
+      navigation.setOptions({ headerShown: t("navigation.add-code") });
     }
-  }, [editMode, navigation, t]);
+  }, [editMode, t]);
 
   return (
-    <SafeAreaView style={styles.screenWrapper} testID='add-edit'>
+    <SafeAreaView style={styles.screenWrapper} testID="add-edit">
       <CodeForm type={type} value={value} onAdd={onAdd} onCancel={onCancel} editMode={!!editMode} />
     </SafeAreaView>
   );

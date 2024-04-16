@@ -1,11 +1,11 @@
-import {createStyleSheet} from 'react-native-unistyles';
-import {FontSize} from '@app/enums/FontSize.enum.ts';
+import { FontSize } from "@shared/enums/FontSize.enum";
+import { createStyleSheet } from "react-native-unistyles";
 
 export const chooseTypeStyleSheet = createStyleSheet(theme => ({
   screenWrapper: {
-    minHeight: '100%',
+    minHeight: "100%",
     backgroundColor: theme.colors.background,
-    position: 'relative',
+    position: "relative",
     flex: 1,
     paddingBottom: 20,
   },

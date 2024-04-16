@@ -1,12 +1,12 @@
-import {Code, CodeID} from '@domain/Code/model/Code.ts';
-import {create} from 'zustand';
-import {createJSONStorage, persist} from 'zustand/middleware';
-import uuid from 'react-native-uuid';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Code, CodeID } from "@domain/Code/model/Code";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import uuid from "react-native-uuid";
+import { create } from "zustand";
+import { createJSONStorage, persist } from "zustand/middleware";
 
 type CodesStore = {
   codes: Code[];
-  addCode: (codeData: Omit<Code, 'id'>) => void;
+  addCode: (codeData: Omit<Code, "id">) => void;
   removeCode: (id: CodeID) => void;
 };
 
@@ -16,11 +16,11 @@ export const useCodesStore = create<CodesStore>()(
       codes: [],
       addCode: codeData => {
         const id = uuid.v4().toString();
-        set(({codes: prevCodes}) => ({codes: [...prevCodes, {id, ...codeData}]}));
+        set(({ codes: prevCodes }) => ({ codes: [...prevCodes, { id, ...codeData }] }));
         return id;
       },
       removeCode: id => {
-        set(({codes: prevCodes}) => {
+        set(({ codes: prevCodes }) => {
           return {
             codes: prevCodes.filter(c => c.id !== id),
           };
@@ -28,7 +28,7 @@ export const useCodesStore = create<CodesStore>()(
       },
     }),
     {
-      name: 'codes-store',
+      name: "codes-store",
       storage: createJSONStorage(() => AsyncStorage),
     },
   ),

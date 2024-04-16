@@ -1,5 +1,5 @@
-import {StyleSheet, TextStyle, ViewStyle} from 'react-native';
-import {ColorEnum} from '@app/enums/Color.enum.ts';
+import { ColorEnum } from "@shared/enums/Color.enum";
+import { StyleSheet, TextStyle, ViewStyle } from "react-native";
 
 type CameraViewStyles = {
   CameraViewWrapper: ViewStyle;
@@ -9,16 +9,16 @@ type CameraViewStyles = {
 
 export const styles = StyleSheet.create<CameraViewStyles>({
   CameraViewWrapper: {
-    width: '100%',
-    height: '100%',
-    position: 'relative',
+    width: "100%",
+    height: "100%",
+    position: "relative",
   },
   VisionCamera: {
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
   },
   CloseButton: {
-    position: 'absolute',
+    position: "absolute",
     top: 10,
     left: 10,
     margin: 0,

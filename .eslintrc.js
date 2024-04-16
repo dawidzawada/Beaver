@@ -1,27 +1,15 @@
 module.exports = {
   root: true,
-  extends: ['@react-native-community', 'eslint:recommended', 'plugin:@typescript-eslint/recommended'],
-  plugins: ['react-native', 'unused-imports', 'detox'],
+  extends: ["universe/native"],
   rules: {
-    'no-unused-vars': 'off',
-    '@typescript-eslint/no-var-requires': 'off',
-    '@typescript-eslint/ban-ts-comment': 'off',
-    '@typescript-eslint/no-namespace': 'off',
-    '@typescript-eslint/no-empty-interface': 'off',
-    'prettier/prettier': 'warn',
-    '@typescript-eslint/no-unused-vars': 'off',
-    'unused-imports/no-unused-imports': 'error',
-    'react/jsx-boolean-value': 1,
-    'react/jsx-curly-brace-presence': [1, {props: 'never', children: 'never'}],
-    'no-console': 'warn',
-    'no-empty-pattern': 1,
-    'no-shadow': 'off',
-    '@typescript-eslint/no-shadow': ['error'],
-    'jsx-quotes': ['warn', 'prefer-single'],
-    // React-native rules
-    'react-native/no-unused-styles': 2,
-    'react-native/no-inline-styles': 1,
-    'react-native/no-color-literals': 1,
-    'react-native/no-single-element-style-arrays': 1,
+    // Ensures props and state inside functions are always up-to-date
+    "react-hooks/exhaustive-deps": "warn",
   },
+  overrides: [
+    {
+      // Test files only
+      files: ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"],
+      extends: ["plugin:testing-library/react"],
+    },
+  ],
 };

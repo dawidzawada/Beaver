@@ -1,11 +1,11 @@
-import {createStyleSheet} from 'react-native-unistyles';
-import {FontSize} from '@app/enums/FontSize.enum.ts';
+import { FontSize } from "@shared/enums/FontSize.enum";
+import { createStyleSheet } from "react-native-unistyles";
 
 export const listScreenStyleSheet = createStyleSheet(theme => ({
   container: {
-    minHeight: '100%',
+    minHeight: "100%",
     flex: 1,
-    position: 'relative',
+    position: "relative",
     backgroundColor: theme.colors.background,
   },
   list: {
@@ -13,18 +13,18 @@ export const listScreenStyleSheet = createStyleSheet(theme => ({
     paddingHorizontal: 16,
   },
   menu: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 10,
     right: 10,
     zIndex: 2,
   },
   noCodes: {
     fontSize: FontSize.M,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     color: theme.colors.neutralContrast,
     opacity: 0.4,
     marginVertical: 50,
-    width: '100%',
-    textAlign: 'center',
+    width: "100%",
+    textAlign: "center",
   },
 }));

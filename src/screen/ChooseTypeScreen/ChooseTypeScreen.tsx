@@ -1,43 +1,41 @@
-import React from 'react';
-import {SectionList, TouchableOpacity, Text} from 'react-native';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {StackParamList} from '@app/navigation/StackParamList.type.ts';
-import {useTranslation} from 'react-i18next';
-import {mostlyUsedCodes} from '@domain/Code/constans/MostlyUsedCodes.constans.ts';
-import {otherCodes} from '@domain/Code/constans/OtherCodes.constans.ts';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {BwipCodeTypes} from 'bwip-js';
-import {useStyles} from 'react-native-unistyles';
-import {chooseTypeStyleSheet} from './ChooseTypeScreen.styles.ts';
-import {Divider} from '@app/components/Divider.tsx';
+import { mostlyUsedCodes } from "@domain/Code/constans/MostlyUsedCodes.constans";
+import { otherCodes } from "@domain/Code/constans/OtherCodes.constans";
+import { Divider } from "@shared/components/Divider";
+import { routerPush } from "@shared/navigation/typedRouting";
+import { BwipCodeTypes } from "bwip-js";
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { SectionList, TouchableOpacity, Text } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useStyles } from "react-native-unistyles";
 
-type Props = NativeStackScreenProps<StackParamList, 'ChooseType'>;
+import { chooseTypeStyleSheet } from "./ChooseTypeScreen.styles";
 
 const codes = [
   {
-    title: 'Mostly used codes',
+    title: "Mostly used codes",
     data: mostlyUsedCodes,
   },
   {
-    title: 'Other codes',
+    title: "Other codes",
     data: otherCodes,
   },
 ];
 
-export const ChooseTypeScreen = ({navigation}: Props) => {
-  const {styles} = useStyles(chooseTypeStyleSheet);
-  const {t} = useTranslation();
+export const ChooseTypeScreen = () => {
+  const { styles } = useStyles(chooseTypeStyleSheet);
+  const { t } = useTranslation();
 
   const onTypePress = (type: BwipCodeTypes) => {
-    navigation.navigate('AddEditCode', {type});
+    routerPush("/add-edit", { type });
   };
 
   return (
-    <SafeAreaView testID='choose-type' style={styles.screenWrapper}>
+    <SafeAreaView testID="choose-type" style={styles.screenWrapper}>
       <SectionList
         sections={codes}
-        renderSectionHeader={({section: {title}}) => <Text style={styles.sectionTitle}>{title}</Text>}
-        renderItem={({item}) => (
+        renderSectionHeader={({ section: { title } }) => <Text style={styles.sectionTitle}>{title}</Text>}
+        renderItem={({ item }) => (
           <TouchableOpacity testID={`type-${item}`} style={styles.codeItem} onPress={() => onTypePress(item)}>
             <Text style={styles.codeItemText}>{`${t(`code.${item}`)} (${item})`}</Text>
           </TouchableOpacity>

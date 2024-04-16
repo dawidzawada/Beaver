@@ -1,30 +1,27 @@
-import React, {useEffect} from 'react';
-import {View, Text} from 'react-native';
-import {useCameraPermission} from 'react-native-vision-camera';
-import {styles} from './ScannerScreen.styles.ts';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {CameraView} from '@domain/Scanner/components/Camera/CameraView.tsx';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {StackParamList} from '@app/navigation/StackParamList.type.ts';
-import {transformTypeCameraToBwip} from '@domain/Code/utils/transformTypeCameraToBwip.ts';
-import {CameraCode} from 'react-native-vision-camera';
-import {useTranslation} from 'react-i18next';
+import { transformTypeCameraToBwip } from "@domain/Code/utils/transformTypeCameraToBwip";
+import { CameraView } from "@domain/Scanner/components/Camera/CameraView";
+import { routerPush } from "@shared/navigation/typedRouting";
+import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { View, Text } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useCameraPermission, CameraCode } from "react-native-vision-camera";
 
-type Props = NativeStackScreenProps<StackParamList, 'Scanner'>;
+import { styles } from "./ScannerScreen.styles";
 
-export const ScannerScreen = ({navigation}: Props) => {
-  const {t} = useTranslation();
-  const {hasPermission, requestPermission} = useCameraPermission();
+export const ScannerScreen = () => {
+  const { t } = useTranslation();
+  const { hasPermission, requestPermission } = useCameraPermission();
 
   const onClose = () => {
-    navigation.navigate('List');
+    routerPush("/list");
   };
 
   const onCodeScanned = (cameraCodes: CameraCode[]) => {
     const firstCode = cameraCodes[0];
-    if (firstCode !== 'unknown') {
+    if (firstCode !== "unknown") {
       const codeType = transformTypeCameraToBwip(firstCode.type);
-      codeType && navigation.navigate('AddEditCode', {type: codeType, value: firstCode.value});
+      codeType && routerPush("/add-edit", { type: codeType, value: firstCode.value });
     }
   };
 
@@ -40,7 +37,7 @@ export const ScannerScreen = ({navigation}: Props) => {
         <CameraView onCloseButtonPress={onClose} onCodeScanned={onCodeScanned} />
       ) : (
         <View style={styles.NoPermissionsWrapper}>
-          <Text style={styles.NoPermissionsText}>{t('camera.no-permissions')}</Text>
+          <Text style={styles.NoPermissionsText}>{t("camera.no-permissions")}</Text>
         </View>
       )}
     </SafeAreaView>

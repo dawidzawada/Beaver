@@ -1,7 +1,7 @@
-import {toDataURL, CodeRenderOptions, BwipCodeTypes, DataURL} from 'bwip-js';
-import React, {useEffect, useState} from 'react';
-import {Image} from 'react-native';
-import {useStyles} from 'react-native-unistyles';
+import { toDataURL, CodeRenderOptions, BwipCodeTypes, DataURL } from "bwip-js";
+import React, { useEffect, useState } from "react";
+import { Image } from "react-native";
+import { useStyles } from "react-native-unistyles";
 
 type Props = {
   type: BwipCodeTypes;
@@ -9,9 +9,9 @@ type Props = {
   codeContainerWidth: number;
 };
 
-export const CodeDrawer = ({type, value, codeContainerWidth}: Props) => {
+export const CodeDrawer = ({ type, value, codeContainerWidth }: Props) => {
   const [codeImg, setCodeImg] = useState<DataURL>();
-  const {theme} = useStyles();
+  const { theme } = useStyles();
 
   useEffect(() => {
     const asyncEffect = async () => {
@@ -24,7 +24,7 @@ export const CodeDrawer = ({type, value, codeContainerWidth}: Props) => {
         try {
           const data = await toDataURL(options);
           setCodeImg(data);
-        } catch (e) {
+        } catch {
           // `e` may be a string or Error object
         }
       }
@@ -39,7 +39,7 @@ export const CodeDrawer = ({type, value, codeContainerWidth}: Props) => {
 
     const aspectRatio = codeImg.width / codeImg.height;
     const targetWidth = Math.min(maxFittedCodeWidth, targetHeight * aspectRatio);
-    return <Image style={{height: targetHeight, width: targetWidth}} source={{uri: codeImg.uri}} />;
+    return <Image style={{ height: targetHeight, width: targetWidth }} source={{ uri: codeImg.uri }} />;
   }
 
   return null;

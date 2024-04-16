@@ -9,15 +9,21 @@ just like a Beaver! 🦫
 
 ### Install & Run 🛠️
 
-#### Currently app is developed mainly for Android.
+Install dependencies and run expo:
 
-Install dependencies and run Metro:
 ```
-npm install
-npm start
+bun install
+bunx expo start
 ```
 
 Run Android by pressing "**a**" or:
+
 ```
-npm run android
+bunx expo run android
+```
+
+Run iOS by pressing "**i**" or:
+
+```
+bunx expo run ios
 ```

@@ -1,5 +1,5 @@
-import {StyleSheet, TextStyle, ViewStyle} from 'react-native';
-import {ColorEnum} from '@app/enums/Color.enum.ts';
+import { ColorEnum } from "@shared/enums/Color.enum";
+import { StyleSheet, TextStyle, ViewStyle } from "react-native";
 
 type ScannerScreenStyles = {
   ScannerScreenWrapper: ViewStyle;
@@ -13,10 +13,10 @@ export const styles = StyleSheet.create<ScannerScreenStyles>({
   },
   NoPermissionsWrapper: {
     backgroundColor: ColorEnum.Graphite,
-    width: '100%',
-    height: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
+    width: "100%",
+    height: "100%",
+    alignItems: "center",
+    justifyContent: "center",
   },
   NoPermissionsText: {
     color: ColorEnum.White,

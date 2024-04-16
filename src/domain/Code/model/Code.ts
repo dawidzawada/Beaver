@@ -1,4 +1,4 @@
-import {BwipCodeTypes} from 'bwip-js';
+import { BwipCodeTypes } from "bwip-js";
 
 export type CodeID = string;
 
