@@ -9,7 +9,7 @@ import { SectionList, TouchableOpacity, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useStyles } from "react-native-unistyles";
 
-import { chooseTypeStyleSheet } from "./ChooseTypeScreen.styles";
+import { chooseTypeStyleSheet } from "./styles";
 
 const codes = [
   {
@@ -22,7 +22,7 @@ const codes = [
   },
 ];
 
-export const ChooseTypeScreen = () => {
+export default function ChooseType() {
   const { styles } = useStyles(chooseTypeStyleSheet);
   const { t } = useTranslation();
 
@@ -45,4 +45,4 @@ export const ChooseTypeScreen = () => {
       />
     </SafeAreaView>
   );
-};
+}

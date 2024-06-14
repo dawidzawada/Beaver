@@ -9,9 +9,8 @@ import { Text, FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useStyles } from "react-native-unistyles";
 
-import { listScreenStyleSheet } from "./ListScreen.styles";
-
-export default function ListScreen() {
+import { listScreenStyleSheet } from "./styles";
+export default function List() {
   const { styles } = useStyles(listScreenStyleSheet);
   const { t } = useTranslation();
   const [menuOpened, setMenuOpened] = useState(false);

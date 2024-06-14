@@ -6,10 +6,9 @@ import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useStyles } from "react-native-unistyles";
+import { addEditScreenStylesheet } from "./styles";
 
-import { addEditScreenStylesheet } from "./AddEditScreen.styles";
-
-export const AddEditScreen = () => {
+export default function AddEdit() {
   const { t } = useTranslation();
   const navigation = useNavigation();
   const { styles } = useStyles(addEditScreenStylesheet);
@@ -39,4 +38,4 @@ export const AddEditScreen = () => {
       <CodeForm type={type} value={value} onAdd={onAdd} onCancel={onCancel} editMode={!!editMode} />
     </SafeAreaView>
   );
-};
+}

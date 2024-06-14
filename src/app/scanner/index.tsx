@@ -7,9 +7,9 @@ import { View, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useCameraPermission, CameraCode } from "react-native-vision-camera";
 
-import { styles } from "./ScannerScreen.styles";
+import { styles } from "./styles";
 
-export const ScannerScreen = () => {
+export default function Scanner() {
   const { t } = useTranslation();
   const { hasPermission, requestPermission } = useCameraPermission();
 
@@ -42,4 +42,4 @@ export const ScannerScreen = () => {
       )}
     </SafeAreaView>
   );
-};
+}
