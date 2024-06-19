@@ -1,46 +1,38 @@
-import { toDataURL, CodeRenderOptions, BwipCodeTypes, DataURL } from "bwip-js";
-import React, { useEffect, useState } from "react";
-import { Image } from "react-native";
+import React, { useRef } from "react";
+import { Dimensions, View } from "react-native";
 import { useStyles } from "react-native-unistyles";
+import { ZebraCode, CodeSize } from "zebra-striped";
+import { codeDrawerStylesheet } from "./CodeDrawer.styles";
+import { CodeFormat } from "@domain/Code/model/CodeFormat";
 
 type Props = {
-  type: BwipCodeTypes;
+  type: CodeFormat;
   value: string;
-  codeContainerWidth: number;
+  height: number;
 };
 
-export const CodeDrawer = ({ type, value, codeContainerWidth }: Props) => {
-  const [codeImg, setCodeImg] = useState<DataURL>();
-  const { theme } = useStyles();
+const codeWidth = Dimensions.get("screen").width - 30;
 
-  useEffect(() => {
-    const asyncEffect = async () => {
-      if (value && value.length > 0) {
-        const options: CodeRenderOptions = {
-          bcid: type,
-          text: value,
-          barcolor: theme.colors.neutralContrast,
-        };
-        try {
-          const data = await toDataURL(options);
-          setCodeImg(data);
-        } catch {
-          // `e` may be a string or Error object
-        }
-      }
-    };
+export const CodeDrawer = ({ type, value, height }: Props) => {
+  const { styles, theme } = useStyles(codeDrawerStylesheet);
+  const containerSize = useRef<CodeSize>({ width: 0, height: 0 });
 
-    void asyncEffect();
-  }, [theme.colors.neutralContrast, type, value]);
-
-  if (codeImg) {
-    const targetHeight = 140;
-    const maxFittedCodeWidth = codeContainerWidth - 20;
-
-    const aspectRatio = codeImg.width / codeImg.height;
-    const targetWidth = Math.min(maxFittedCodeWidth, targetHeight * aspectRatio);
-    return <Image style={{ height: targetHeight, width: targetWidth }} source={{ uri: codeImg.uri }} />;
-  }
-
-  return null;
+  return (
+    <View
+      style={styles.codeDrawer}
+      onLayout={e => {
+        const { width, height } = e.nativeEvent.layout;
+        containerSize.current = { width, height };
+      }}>
+      <ZebraCode
+        value={value}
+        format={type}
+        size={{
+          width: codeWidth,
+          height: height,
+        }}
+        offColor={theme.colors.backgroundHighlight}
+      />
+    </View>
+  );
 };

@@ -1,18 +1,16 @@
 import { CodeDrawer } from "@domain/Code/components/CodeDrawer/CodeDrawer";
 import { codeFormStylesheet } from "@domain/Code/components/CodeForm/CodeForm.styles";
+import { CodeFormat } from "@domain/Code/model/CodeFormat";
 import { Button } from "@shared/components/Button/Button";
 import { Input } from "@shared/components/Input/Input";
 import { useDebounce } from "@shared/hook/useDebounce";
-import { BwipCodeTypes } from "bwip-js";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import { useStyles } from "react-native-unistyles";
 
-const MemoizedCodeDrawer = React.memo(CodeDrawer);
-
 type Props = {
-  type: BwipCodeTypes;
+  type: CodeFormat;
   value: string | undefined;
   onAdd: (codeValue: string, title: string) => void;
   onCancel: () => void;
@@ -22,12 +20,10 @@ type Props = {
 export const CodeForm = ({ type, value, onAdd, onCancel, editMode }: Props) => {
   const { t } = useTranslation();
   const { styles } = useStyles(codeFormStylesheet);
-  const [codeValue, setCodeValue] = useState<string | undefined>(value);
-  const [debouncedValue, setDebouncedValue] = useState<string | undefined>();
+  const [codeValue, setCodeValue] = useState<string>(value ?? "");
+  const [debouncedCodeValue, setDebouncedCodeValue] = useState<string>(value ?? "");
   const [title, setTitle] = useState<string>("");
-  const debouncedUpdateValue = useDebounce((val: string | undefined) => setDebouncedValue(val), 500);
-
-  const codeViewWidth = useRef<number>();
+  const updateCodeValue = useDebounce((val: string) => setDebouncedCodeValue(val), 200);
 
   const onAddPress = () => {
     codeValue && onAdd(codeValue, title);
@@ -38,17 +34,13 @@ export const CodeForm = ({ type, value, onAdd, onCancel, editMode }: Props) => {
   };
 
   useEffect(() => {
-    debouncedUpdateValue(codeValue);
-  }, [codeValue, debouncedUpdateValue]);
+    updateCodeValue(codeValue);
+  }, [codeValue, updateCodeValue]);
 
   return (
     <>
       <View style={styles.box}>
-        <View style={styles.codeView} onLayout={e => (codeViewWidth.current = e.nativeEvent.layout.width)}>
-          {debouncedValue && (
-            <MemoizedCodeDrawer type={type} value={debouncedValue} codeContainerWidth={codeViewWidth.current ?? 0} />
-          )}
-        </View>
+        <CodeDrawer type={type} value={debouncedCodeValue} height={150} />
         <Input label={t("add-edit.code-type")} value={`(${type}) ${t(`code.${type}`)}`} disabled />
         <Input
           label={t("add-edit.code-value")}

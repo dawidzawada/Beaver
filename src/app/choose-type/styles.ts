@@ -9,13 +9,6 @@ export const chooseTypeStyleSheet = createStyleSheet(theme => ({
     flex: 1,
     paddingBottom: 20,
   },
-  sectionTitle: {
-    paddingVertical: 20,
-    paddingHorizontal: 10,
-    color: theme.colors.neutralContrast,
-    backgroundColor: theme.colors.background,
-    fontSize: FontSize.M,
-  },
   codeItem: {
     padding: 20,
   },

@@ -1,4 +1,4 @@
-import { BwipCodeTypes } from "bwip-js";
+import { CodeFormat } from "@domain/Code/model/CodeFormat";
 import { router, useLocalSearchParams } from "expo-router";
 
 export type Routes = "/list" | "/choose-type" | "/add-edit" | "/scanner" | "/code-overview" | "/beaver";
@@ -8,7 +8,7 @@ export interface RoutesTypes extends Record<Routes, object | undefined> {
   "/choose-type": undefined;
   "/add-edit": undefined;
   "/scanner": undefined;
-  "/code-overview": { type: BwipCodeTypes; value?: string; editMode?: boolean };
+  "/code-overview": { type: CodeFormat; value?: string; editMode?: boolean };
   "/beaver": undefined;
 }
 
