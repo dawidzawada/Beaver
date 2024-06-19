@@ -1,4 +1,5 @@
 import { codeTypes } from "@domain/Code/constans/codeTypes.constans";
+import { CodeFormat } from "@domain/Code/model/CodeFormat";
 import { Divider } from "@shared/components/Divider";
 import { routerPush } from "@shared/navigation/typedRouting";
 import React from "react";
@@ -8,7 +9,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useStyles } from "react-native-unistyles";
 
 import { chooseTypeStyleSheet } from "./styles";
-import { CodeFormat } from "@domain/Code/model/CodeFormat";
 
 const codes = [
   {

@@ -6,13 +6,14 @@ import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useStyles } from "react-native-unistyles";
+
 import { addEditScreenStylesheet } from "./styles";
 
 export default function AddEdit() {
   const { t } = useTranslation();
   const navigation = useNavigation();
   const { styles } = useStyles(addEditScreenStylesheet);
-  const { type, value, editMode } = useTypedParams("/add-edit");
+  const { type, value, editMode } = useTypedParams<"/add-edit">();
 
   const addCode = useCodesStore(state => state.addCode);
 

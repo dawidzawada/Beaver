@@ -1,4 +1,5 @@
 import { CodeType } from "react-native-vision-camera";
+
 import { CodeFormat } from "../model/CodeFormat";
 
 export const transformCameraTypeToCodeFormat = (visionCameraType: CodeType | "unknown"): CodeFormat | undefined => {

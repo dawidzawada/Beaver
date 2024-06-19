@@ -6,13 +6,23 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import "@shared/styles/unistyles";
 import { useStyles } from "react-native-unistyles";
 import { t } from "i18next";
+import { ComponentProps } from "react";
+import { Font } from "@shared/enums/Font.enum";
+
+type ScreenOptions = ComponentProps<typeof Stack>["screenOptions"];
 
 export default function MainLayout() {
   const { theme } = useStyles();
 
-  const screenOptions = {
+  const screenOptions: ScreenOptions = {
     headerStyle: {
       backgroundColor: theme.colors.background,
+    },
+    headerTitleStyle: {
+      fontFamily: Font.Regular,
+    },
+    headerBackTitleStyle: {
+      fontFamily: Font.Regular,
     },
     headerTintColor: theme.colors.neutralContrast,
   };

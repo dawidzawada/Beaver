@@ -12,9 +12,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.anonymous.Beaver",
@@ -28,9 +26,7 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.anonymous.Beaver",
-      "permissions": [
-        "android.permission.CAMERA"
-      ]
+      "permissions": ["android.permission.CAMERA"]
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -44,14 +40,17 @@
           "enableCodeScanner": true
         }
       ],
-      "@config-plugins/detox"
+      "@config-plugins/detox",
+      [
+        "expo-font",
+        {
+          "fonts": ["./assets/fonts/Outfit-Bold.ttf", "./assets/fonts/Outfit-Regular.ttf"]
+        }
+      ]
     ],
     "extra": {
       "router": {
         "origin": false
-      },
-      "eas": {
-        "projectId": "949fa2dc-9d3a-4c11-87af-8386ee864159"
       }
     }
   }

@@ -1,4 +1,4 @@
-import { FontSize } from "@shared/enums/FontSize.enum";
+import { Font, FontSize } from "@shared/enums/Font.enum";
 import { createStyleSheet } from "react-native-unistyles";
 
 export const chooseTypeStyleSheet = createStyleSheet(theme => ({
@@ -14,6 +14,7 @@ export const chooseTypeStyleSheet = createStyleSheet(theme => ({
   },
   codeItemText: {
     fontSize: FontSize.S,
+    fontFamily: Font.Regular,
     color: theme.colors.neutralContrast,
   },
 }));

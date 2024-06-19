@@ -6,14 +6,18 @@ import { createJSONStorage, persist } from "zustand/middleware";
 
 type CodesStore = {
   codes: Code[];
+  getCode: (id: string) => Code | undefined;
   addCode: (codeData: Omit<Code, "id">) => void;
   removeCode: (id: CodeID) => void;
 };
 
 export const useCodesStore = create<CodesStore>()(
   persist(
-    set => ({
+    (set, get) => ({
       codes: [],
+      getCode: id => {
+        return get().codes.find(code => code.id === id);
+      },
       addCode: codeData => {
         const id = uuid.v4().toString();
         set(({ codes: prevCodes }) => ({ codes: [...prevCodes, { id, ...codeData }] }));

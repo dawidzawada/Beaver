@@ -2,6 +2,7 @@ import { BorderRadius } from "@shared/constans/BorderRadius.constans";
 import { createStyleSheet } from "react-native-unistyles";
 
 export const codeFormStylesheet = createStyleSheet(theme => ({
+  keyboardView: { width: "100%" },
   box: {
     marginVertical: 20,
     width: "100%",

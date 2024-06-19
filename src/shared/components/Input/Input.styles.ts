@@ -1,4 +1,4 @@
-import { FontSize } from "@shared/enums/FontSize.enum";
+import { Font, FontSize } from "@shared/enums/Font.enum";
 import { createStyleSheet } from "react-native-unistyles";
 
 export const inputStylesheet = createStyleSheet(theme => ({
@@ -12,6 +12,7 @@ export const inputStylesheet = createStyleSheet(theme => ({
     paddingLeft: 6,
     opacity: disabled ? 0.4 : 1,
     fontSize: FontSize.XS,
+    fontFamily: Font.Bold,
     color: theme.colors.neutralContrast,
   }),
   input: (disabled: boolean) => ({
@@ -25,5 +26,6 @@ export const inputStylesheet = createStyleSheet(theme => ({
     opacity: disabled ? 0.4 : 1,
     borderRadius: 12,
     fontSize: FontSize.S,
+    fontFamily: Font.Regular,
   }),
 }));

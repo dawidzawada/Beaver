@@ -6,9 +6,9 @@ export type Routes = "/list" | "/choose-type" | "/add-edit" | "/scanner" | "/cod
 export interface RoutesTypes extends Record<Routes, object | undefined> {
   "/list": undefined;
   "/choose-type": undefined;
-  "/add-edit": undefined;
+  "/add-edit": { type: CodeFormat; value?: string; editMode?: boolean };
   "/scanner": undefined;
-  "/code-overview": { type: CodeFormat; value?: string; editMode?: boolean };
+  "/code-overview": { id: string };
   "/beaver": undefined;
 }
 
@@ -16,7 +16,7 @@ export const routerPush = (pathname: Routes, params?: RoutesTypes[typeof pathnam
   return router.push({ pathname, params });
 };
 
-export const useTypedParams = (pathname: Routes) => {
+export const useTypedParams = <T extends Routes>() => {
   const params = useLocalSearchParams();
-  return params as unknown as Exclude<RoutesTypes[typeof pathname], undefined>;
+  return params as unknown as RoutesTypes[T];
 };
