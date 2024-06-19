@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, userEvent } from "@testing-library/react-native";
-import { CodeListItem } from "../src/domain/Code/components/CodeListItem/CodeListItem";
+import { CodeListItem } from "../../src/domain/Code/components/CodeListItem/CodeListItem";
 
 describe("<CodeListItem />", () => {
   const mockPress = jest.fn();

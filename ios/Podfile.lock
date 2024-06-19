@@ -1177,6 +1177,12 @@ PODS:
     - React-callinvoker
     - React-Core
   - Yoga (1.14.0)
+  - ZebraStriped (0.2.1):
+    - ExpoModulesCore
+    - ZXingObjC (~> 3.6.9)
+  - ZXingObjC (3.6.9):
+    - ZXingObjC/All (= 3.6.9)
+  - ZXingObjC/All (3.6.9)
 
 DEPENDENCIES:
   - boost (from `../node_modules/react-native/third-party-podspecs/boost.podspec`)
@@ -1253,12 +1259,14 @@ DEPENDENCIES:
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - VisionCamera (from `../node_modules/react-native-vision-camera`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
+  - ZebraStriped (from `../node_modules/zebra-striped/ios`)
 
 SPEC REPOS:
   trunk:
     - fmt
     - libevent
     - SocketRocket
+    - ZXingObjC
 
 EXTERNAL SOURCES:
   boost:
@@ -1404,6 +1412,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-vision-camera"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
+  ZebraStriped:
+    :path: "../node_modules/zebra-striped/ios"
 
 SPEC CHECKSUMS:
   boost: d3f49c53809116a5d38da093a8aa78bf551aed09
@@ -1480,6 +1490,8 @@ SPEC CHECKSUMS:
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   VisionCamera: 36c460338692788a0d377dce7d32f8ba049fb4f2
   Yoga: 805bf71192903b20fc14babe48080582fee65a80
+  ZebraStriped: 50410d2141753b9f2e60603a0faa07b16911904f
+  ZXingObjC: 8898711ab495761b2dbbdec76d90164a6d7e14c5
 
 PODFILE CHECKSUM: 95ed44316420c1a22b5fdb764b73c61e666f4cb5
 

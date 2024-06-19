@@ -1,10 +1,10 @@
-import { BwipCodeTypes } from "bwip-js";
+import { CodeFormat } from "./CodeFormat";
 
 export type CodeID = string;
 
 export interface Code {
   id: CodeID;
-  type: BwipCodeTypes;
+  type: CodeFormat;
   value: string;
   title: string;
 }

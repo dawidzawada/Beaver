@@ -12,12 +12,4 @@ export const codeFormStylesheet = createStyleSheet(theme => ({
   spacer: {
     flex: 1,
   },
-  codeView: {
-    minHeight: 150,
-    backgroundColor: theme.colors.backgroundHighlight,
-    paddingVertical: 8,
-    borderRadius: BorderRadius,
-    justifyContent: "center",
-    alignItems: "center",
-  },
 }));
