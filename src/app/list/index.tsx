@@ -3,7 +3,7 @@ import { FloatingMenu } from "@shared/components/FloatingMenu/FloatingMenu";
 import { Logo } from "@shared/components/Logo/Logo";
 import { routerPush } from "@shared/navigation/typedRouting";
 import { useCodesStore } from "@store/codes.store";
-import { useTranslation } from "node_modules/react-i18next";
+import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import { Text, FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -19,8 +19,8 @@ export default function List() {
 
   const toggleMenu = () => setMenuOpened(open => !open);
 
-  const onCodePress = () => {
-    routerPush("/code-overview");
+  const onCodePress = (id: string) => {
+    routerPush("/code-overview", { id });
     setMenuOpened(false);
   };
 
@@ -57,7 +57,7 @@ export default function List() {
               key={item.id}
               type="qrcode"
               name={item.title}
-              onPress={onCodePress}
+              onPress={() => onCodePress(item.id)}
               onLongPress={() => onLongCodePress(item.id)}
             />
           )}

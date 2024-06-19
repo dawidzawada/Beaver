@@ -12,7 +12,7 @@ export default function AddEdit() {
   const { t } = useTranslation();
   const navigation = useNavigation();
   const { styles } = useStyles(addEditScreenStylesheet);
-  const { type, value, editMode } = useTypedParams("/add-edit");
+  const { type, value, editMode } = useTypedParams<"/add-edit">();
 
   const addCode = useCodesStore(state => state.addCode);
 

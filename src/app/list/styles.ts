@@ -1,4 +1,4 @@
-import { FontSize } from "@shared/enums/FontSize.enum";
+import { Font, FontSize } from "@shared/enums/Font.enum";
 import { createStyleSheet } from "react-native-unistyles";
 
 export const listScreenStyleSheet = createStyleSheet(theme => ({
@@ -20,7 +20,7 @@ export const listScreenStyleSheet = createStyleSheet(theme => ({
   },
   noCodes: {
     fontSize: FontSize.M,
-    fontWeight: "bold",
+    fontFamily: Font.Regular,
     color: theme.colors.neutralContrast,
     opacity: 0.4,
     marginVertical: 50,

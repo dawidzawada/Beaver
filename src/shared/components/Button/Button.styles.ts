@@ -1,4 +1,4 @@
-import { FontSize } from "@shared/enums/FontSize.enum";
+import { Font, FontSize } from "@shared/enums/Font.enum";
 import { createStyleSheet } from "react-native-unistyles";
 
 export const stylesheetButton = createStyleSheet(theme => ({
@@ -21,8 +21,8 @@ export const stylesheetButton = createStyleSheet(theme => ({
     return {
       color: mode === "contained" ? containedButtonColor : theme.colors.primary,
       opacity: disabled ? 0.4 : 1,
-      fontWeight: "bold",
       fontSize: FontSize.S,
+      fontFamily: Font.Regular,
     };
   },
 }));

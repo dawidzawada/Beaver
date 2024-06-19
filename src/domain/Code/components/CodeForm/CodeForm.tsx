@@ -6,7 +6,7 @@ import { Input } from "@shared/components/Input/Input";
 import { useDebounce } from "@shared/hook/useDebounce";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { View } from "react-native";
+import { View, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, ScrollView, Keyboard } from "react-native";
 import { useStyles } from "react-native-unistyles";
 
 type Props = {
@@ -38,35 +38,39 @@ export const CodeForm = ({ type, value, onAdd, onCancel, editMode }: Props) => {
   }, [codeValue, updateCodeValue]);
 
   return (
-    <>
-      <View style={styles.box}>
-        <CodeDrawer type={type} value={debouncedCodeValue} height={150} />
-        <Input label={t("add-edit.code-type")} value={`(${type}) ${t(`code.${type}`)}`} disabled />
-        <Input
-          label={t("add-edit.code-value")}
-          testID="code-value"
-          placeholder={t("add-edit.code-value.placeholder")}
-          value={codeValue}
-          onChangeText={textValue => setCodeValue(textValue)}
-        />
-        <Input
-          label={t("add-edit.code-title")}
-          testID="code-title"
-          placeholder={t("add-edit.code-title.placeholder")}
-          maxLength={45}
-          value={title}
-          onChangeText={textTitle => setTitle(textTitle)}
-        />
-      </View>
-      <View style={styles.spacer} />
-      <View style={styles.box}>
-        <Button testID="add-edit-btn" onPress={onAddPress}>
-          {editMode ? t("general.edit") : t("general.add")}
-        </Button>
-        <Button mode="text" onPress={onCancelPress}>
-          {t("general.cancel")}
-        </Button>
-      </View>
-    </>
+    <KeyboardAvoidingView style={styles.keyboardView} behavior={"position"}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <ScrollView>
+          <View style={styles.box}>
+            <CodeDrawer type={type} value={debouncedCodeValue} height={150} />
+            <Input label={t("add-edit.code-type")} value={`(${type}) ${t(`code.${type}`)}`} disabled />
+            <Input
+              label={t("add-edit.code-value")}
+              testID="code-value"
+              placeholder={t("add-edit.code-value.placeholder")}
+              value={codeValue}
+              onChangeText={textValue => setCodeValue(textValue)}
+            />
+            <Input
+              label={t("add-edit.code-title")}
+              testID="code-title"
+              placeholder={t("add-edit.code-title.placeholder")}
+              maxLength={45}
+              value={title}
+              onChangeText={textTitle => setTitle(textTitle)}
+            />
+          </View>
+          <View style={styles.spacer} />
+          <View style={styles.box}>
+            <Button testID="add-edit-btn" onPress={onAddPress}>
+              {editMode ? t("general.edit") : t("general.add")}
+            </Button>
+            <Button mode="text" onPress={onCancelPress}>
+              {t("general.cancel")}
+            </Button>
+          </View>
+        </ScrollView>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 };
