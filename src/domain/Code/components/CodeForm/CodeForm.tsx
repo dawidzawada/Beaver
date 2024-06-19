@@ -38,7 +38,7 @@ export const CodeForm = ({ type, value, onAdd, onCancel, editMode }: Props) => {
   }, [codeValue, updateCodeValue]);
 
   return (
-    <KeyboardAvoidingView style={styles.keyboardView} behavior={"position"}>
+    <KeyboardAvoidingView style={styles.keyboardView} behavior="position">
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView>
           <View style={styles.box}>

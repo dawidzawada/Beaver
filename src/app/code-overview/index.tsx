@@ -3,11 +3,12 @@ import { Code } from "@domain/Code/model/Code";
 import { useTypedParams } from "@shared/navigation/typedRouting";
 import { useCodesStore } from "@store/codes.store";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { codeOverviewScreenStylesheet } from "./styles";
 import { useStyles } from "react-native-unistyles";
-import { useTranslation } from "react-i18next";
+
+import { codeOverviewScreenStylesheet } from "./styles";
 
 export default function CodeOverview() {
   const { t } = useTranslation();

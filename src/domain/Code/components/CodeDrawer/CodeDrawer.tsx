@@ -1,9 +1,10 @@
+import { CodeFormat } from "@domain/Code/model/CodeFormat";
 import React, { useRef } from "react";
 import { Dimensions, View } from "react-native";
 import { useStyles } from "react-native-unistyles";
 import { ZebraCode, CodeSize } from "zebra-striped";
+
 import { codeDrawerStylesheet } from "./CodeDrawer.styles";
-import { CodeFormat } from "@domain/Code/model/CodeFormat";
 
 type Props = {
   type: CodeFormat;
@@ -29,7 +30,7 @@ export const CodeDrawer = ({ type, value, height }: Props) => {
         format={type}
         size={{
           width: codeWidth,
-          height: height,
+          height,
         }}
         offColor={theme.colors.backgroundHighlight}
       />
