@@ -50,13 +50,14 @@ export default function List() {
 
         <FlatList
           data={codes}
-          numColumns={2}
+          numColumns={1}
           contentContainerStyle={styles.list}
           renderItem={({ item }) => (
             <CodeListItem
               key={item.id}
-              type="qrcode"
+              icon={item.icon}
               name={item.title}
+              style={item.style}
               onPress={() => onCodePress(item.id)}
               onLongPress={() => onLongCodePress(item.id)}
             />

@@ -1,26 +1,33 @@
 import React from "react";
 import { TouchableOpacity, View, Text } from "react-native";
 import { useStyles } from "react-native-unistyles";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-
 import { codeListItemStylesheet } from "./CodeListItem.styles";
+import { CardStyle } from "@domain/Code/types/CardStyle";
+import { CardStyleColor } from "@domain/Code/enums/CardStyleColor";
 
 type Props = {
-  type: "qrcode" | "barcode";
   name: string;
+  icon: string;
+  style: CardStyle;
   onPress: () => void;
   onLongPress: () => void;
 };
 
-export const CodeListItem = ({ type, name, onPress, onLongPress }: Props) => {
+export const CodeListItem = ({ name, icon, style, onPress, onLongPress }: Props) => {
   const { styles, theme } = useStyles(codeListItemStylesheet);
 
   return (
-    <TouchableOpacity testID="code-list-item" style={styles.wrapper} onPress={onPress} onLongPress={onLongPress}>
-      <View style={styles.box}>
-        <Icon size={60} name={type} color={theme.colors.neutralContrast} />
+    <TouchableOpacity
+      testID="code-list-item"
+      style={styles.box(CardStyleColor[style])}
+      onPress={onPress}
+      onLongPress={onLongPress}>
+      <View style={styles.titleBox}>
+        <Text style={styles.title}>{name}</Text>
       </View>
-      <Text style={styles.title}>{name}</Text>
+      <View style={styles.iconBox}>
+        <Text style={styles.icon}>{icon}</Text>
+      </View>
     </TouchableOpacity>
   );
 };

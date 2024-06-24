@@ -8,6 +8,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useStyles } from "react-native-unistyles";
 
 import { addEditScreenStylesheet } from "./styles";
+import { CardStyle } from "@domain/Code/types/CardStyle";
 
 export default function AddEdit() {
   const { t } = useTranslation();
@@ -21,8 +22,8 @@ export default function AddEdit() {
     routerPush("/list");
   };
 
-  const onAdd = (codeValue: string, title: string) => {
-    addCode({ type, value: codeValue, title });
+  const onAdd = (codeValue: string, title: string, icon: string, style: CardStyle) => {
+    addCode({ type, value: codeValue, title, icon, style });
     routerPush("/list");
   };
 
