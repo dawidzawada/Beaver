@@ -1,9 +1,10 @@
+import { CardStyleColor } from "@domain/Code/enums/CardStyleColor";
+import { CardStyle } from "@domain/Code/types/CardStyle";
 import React from "react";
 import { View, Text, Dimensions, Pressable } from "react-native";
-import { useStyles } from "react-native-unistyles";
 import Animated, { Extrapolation, SharedValue, interpolate, useAnimatedStyle } from "react-native-reanimated";
-import { CardStyle } from "@domain/Code/types/CardStyle";
-import { CardStyleColor } from "@domain/Code/enums/CardStyleColor";
+import { useStyles } from "react-native-unistyles";
+
 import { codeListItemStylesheet, CARD_HEIGHT as CARD_BOX_HEIGHT, CARD_MARGIN } from "./CodeListItem.styles";
 
 type Props = {

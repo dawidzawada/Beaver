@@ -6,10 +6,11 @@ import { useCodesStore } from "@store/codes.store";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Text } from "react-native";
+import Animated, { useSharedValue } from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useStyles } from "react-native-unistyles";
+
 import { listScreenStyleSheet } from "./styles";
-import Animated, { useSharedValue } from "react-native-reanimated";
 
 export default function List() {
   const { styles } = useStyles(listScreenStyleSheet);
