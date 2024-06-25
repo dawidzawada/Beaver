@@ -1,4 +1,5 @@
 import { CodeForm } from "@domain/Code/components/CodeForm/CodeForm";
+import { CardStyle } from "@domain/Code/types/CardStyle";
 import { routerPush, useTypedParams } from "@shared/navigation/typedRouting";
 import { useCodesStore } from "@store/codes.store";
 import { useNavigation } from "expo-router";
@@ -21,8 +22,8 @@ export default function AddEdit() {
     routerPush("/list");
   };
 
-  const onAdd = (codeValue: string, title: string) => {
-    addCode({ type, value: codeValue, title });
+  const onAdd = (codeValue: string, title: string, icon: string, style: CardStyle) => {
+    addCode({ type, value: codeValue, title, icon, style });
     routerPush("/list");
   };
 

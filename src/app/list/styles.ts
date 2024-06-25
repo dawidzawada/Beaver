@@ -9,7 +9,7 @@ export const listScreenStyleSheet = createStyleSheet(theme => ({
     backgroundColor: theme.colors.background,
   },
   list: {
-    paddingBottom: 100,
+    paddingBottom: 200,
     paddingHorizontal: 16,
   },
   menu: {

@@ -2,26 +2,36 @@ import { BorderRadius } from "@shared/constans/BorderRadius.constans";
 import { Font, FontSize } from "@shared/enums/Font.enum";
 import { createStyleSheet } from "react-native-unistyles";
 
+export const CARD_HEIGHT = 200;
+export const CARD_MARGIN = 12;
+
 export const codeListItemStylesheet = createStyleSheet(theme => ({
-  wrapper: {
-    width: "50%",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 8,
-    gap: 8,
-  },
-  box: {
+  box: (color: string) => ({
     width: "100%",
-    paddingVertical: 20,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: theme.colors.backgroundHighlight,
+    height: CARD_HEIGHT,
+    flexDirection: "row",
+    backgroundColor: color,
     borderRadius: BorderRadius,
+    marginVertical: CARD_MARGIN,
+  }),
+  iconBox: {
+    width: "40%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  icon: {
+    fontSize: 55,
+  },
+  titleBox: {
+    width: "60%",
+    justifyContent: "center",
+    alignItems: "center",
   },
   title: {
     textAlign: "center",
-    color: theme.colors.neutralContrast,
-    fontSize: FontSize.S,
-    fontFamily: Font.Regular,
+    color: "#FFFFFF",
+    fontSize: FontSize.M,
+    fontFamily: Font.Bold,
+    padding: 12,
   },
 }));

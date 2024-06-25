@@ -2,6 +2,7 @@ import i18n from "@shared/i18n";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { I18nextProvider } from "react-i18next";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import "@shared/styles/unistyles";
 import { useStyles } from "react-native-unistyles";
@@ -28,55 +29,57 @@ export default function MainLayout() {
   };
 
   return (
-    <SafeAreaProvider>
-      <StatusBar style="auto" />
-      <I18nextProvider i18n={i18n}>
-        <Stack screenOptions={screenOptions}>
-          <Stack.Screen
-            name="index"
-            options={{
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="list/index"
-            options={{
-              headerShown: false,
-              title: t("navigation.list"),
-            }}
-          />
-          <Stack.Screen
-            name="beaver/index"
-            options={{
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="code-overview/index"
-            options={{
-              title: t("navigation.code-overview"),
-            }}
-          />
-          <Stack.Screen
-            name="add-edit/index"
-            options={{
-              title: t("navigation.code-overview"),
-            }}
-          />
-          <Stack.Screen
-            name="choose-type/index"
-            options={{
-              title: t("navigation.choose-type"),
-            }}
-          />
-          <Stack.Screen
-            name="scanner/index"
-            options={{
-              headerShown: false,
-            }}
-          />
-        </Stack>
-      </I18nextProvider>
-    </SafeAreaProvider>
+    <GestureHandlerRootView>
+      <SafeAreaProvider>
+        <StatusBar style="auto" />
+        <I18nextProvider i18n={i18n}>
+          <Stack screenOptions={screenOptions}>
+            <Stack.Screen
+              name="index"
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="list/index"
+              options={{
+                headerShown: false,
+                title: t("navigation.list"),
+              }}
+            />
+            <Stack.Screen
+              name="beaver/index"
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="code-overview/index"
+              options={{
+                title: t("navigation.code-overview"),
+              }}
+            />
+            <Stack.Screen
+              name="add-edit/index"
+              options={{
+                title: t("navigation.code-overview"),
+              }}
+            />
+            <Stack.Screen
+              name="choose-type/index"
+              options={{
+                title: t("navigation.choose-type"),
+              }}
+            />
+            <Stack.Screen
+              name="scanner/index"
+              options={{
+                headerShown: false,
+              }}
+            />
+          </Stack>
+        </I18nextProvider>
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
   );
 }

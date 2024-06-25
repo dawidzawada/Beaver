@@ -5,15 +5,19 @@ import { routerPush } from "@shared/navigation/typedRouting";
 import { useCodesStore } from "@store/codes.store";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Text, FlatList } from "react-native";
+import { Text } from "react-native";
+import Animated, { useSharedValue } from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useStyles } from "react-native-unistyles";
 
 import { listScreenStyleSheet } from "./styles";
+
 export default function List() {
   const { styles } = useStyles(listScreenStyleSheet);
   const { t } = useTranslation();
   const [menuOpened, setMenuOpened] = useState(false);
+
+  const y = useSharedValue(0);
 
   const [codes, removeCode] = useCodesStore(state => [state.codes, state.removeCode]);
 
@@ -48,15 +52,24 @@ export default function List() {
           </Text>
         )}
 
-        <FlatList
+        <Animated.FlatList
           data={codes}
-          numColumns={2}
+          bounces={false}
+          numColumns={1}
           contentContainerStyle={styles.list}
-          renderItem={({ item }) => (
+          scrollEventThrottle={16}
+          keyExtractor={item => item.id}
+          onScroll={({ nativeEvent }) => {
+            y.value = nativeEvent.contentOffset.y;
+          }}
+          renderItem={({ item, index }) => (
             <CodeListItem
+              y={y}
+              index={index}
               key={item.id}
-              type="qrcode"
+              icon={item.icon}
               name={item.title}
+              style={item.style}
               onPress={() => onCodePress(item.id)}
               onLongPress={() => onLongCodePress(item.id)}
             />
