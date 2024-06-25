@@ -1,5 +1,6 @@
-import { CodeFormat } from "./CodeFormat";
 import { CardStyle } from "@domain/Code/types/CardStyle";
+
+import { CodeFormat } from "./CodeFormat";
 
 export type CodeID = string;
 

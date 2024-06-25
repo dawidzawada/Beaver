@@ -1,4 +1,5 @@
 import { CodeForm } from "@domain/Code/components/CodeForm/CodeForm";
+import { CardStyle } from "@domain/Code/types/CardStyle";
 import { routerPush, useTypedParams } from "@shared/navigation/typedRouting";
 import { useCodesStore } from "@store/codes.store";
 import { useNavigation } from "expo-router";
@@ -8,7 +9,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useStyles } from "react-native-unistyles";
 
 import { addEditScreenStylesheet } from "./styles";
-import { CardStyle } from "@domain/Code/types/CardStyle";
 
 export default function AddEdit() {
   const { t } = useTranslation();

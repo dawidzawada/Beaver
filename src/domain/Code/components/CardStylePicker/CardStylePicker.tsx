@@ -1,11 +1,12 @@
+import { CardStyleColor } from "@domain/Code/enums/CardStyleColor";
+import { CardStyle } from "@domain/Code/types/CardStyle";
+import { BottomSheetFlatList, TouchableOpacity } from "@gorhom/bottom-sheet";
 import { View, Text } from "react-native";
 import { useStyles } from "react-native-unistyles";
-import { cardStylePickerStylesheet } from "./CardStylePicker.styles";
-import { CardStyleColor } from "@domain/Code/enums/CardStyleColor";
-import { BottomSheetFlatList, TouchableOpacity } from "@gorhom/bottom-sheet";
-import { CardStyle } from "@domain/Code/types/CardStyle";
 
-const cardStyles: Array<{ name: CardStyle; label: string }> = [
+import { cardStylePickerStylesheet } from "./CardStylePicker.styles";
+
+const cardStyles: { name: CardStyle; label: string }[] = [
   { name: "Fire", label: "Fire" },
   { name: "Leaf", label: "Leaf" },
   { name: "Sky", label: "Sky" },

@@ -2,13 +2,13 @@ import i18n from "@shared/i18n";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { I18nextProvider } from "react-i18next";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import "@shared/styles/unistyles";
 import { useStyles } from "react-native-unistyles";
 import { t } from "i18next";
 import { ComponentProps } from "react";
 import { Font } from "@shared/enums/Font.enum";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 type ScreenOptions = ComponentProps<typeof Stack>["screenOptions"];
 

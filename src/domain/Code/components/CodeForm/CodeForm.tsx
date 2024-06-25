@@ -1,7 +1,8 @@
 import { CodeDrawer } from "@domain/Code/components/CodeDrawer/CodeDrawer";
 import { codeFormStylesheet } from "@domain/Code/components/CodeForm/CodeForm.styles";
 import { CodeFormat } from "@domain/Code/model/CodeFormat";
-import BottomSheet from "@gorhom/bottom-sheet";
+import { CardStyle } from "@domain/Code/types/CardStyle";
+import BottomSheet, { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { Button } from "@shared/components/Button/Button";
 import { Input } from "@shared/components/Input/Input";
 import { useDebounce } from "@shared/hook/useDebounce";
@@ -18,9 +19,8 @@ import {
 } from "react-native";
 import { useStyles } from "react-native-unistyles";
 import EmojiPicker, { EmojiType } from "rn-emoji-keyboard";
-import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
+
 import { CardStylePicker } from "../CardStylePicker/CardStylePicker";
-import { CardStyle } from "@domain/Code/types/CardStyle";
 
 type Props = {
   type: CodeFormat;
@@ -33,12 +33,12 @@ type Props = {
 const colorSheetSnapPoints = ["65%"];
 
 const cardStyleIcons: Record<CardStyle, string> = {
-  ["Fire"]: "🔥",
-  ["Leaf"]: "🍀",
-  ["Sky"]: "☁️",
-  ["Deep"]: "🌊",
-  ["Coal"]: "🖤",
-  ["Plum"]: "💜",
+  Fire: "🔥",
+  Leaf: "🍀",
+  Sky: "☁️",
+  Deep: "🌊",
+  Coal: "🖤",
+  Plum: "💜",
 };
 
 export const CodeForm = ({ type, value, onAdd, onCancel, editMode }: Props) => {
